@@ -26,7 +26,7 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: N1.config
   DIY_SH: diy.sh
-  SSH_ACTIONS: false
+#  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
@@ -71,9 +71,9 @@ jobs:
         cd openwrt
         ../$DIY_SH
 
-    - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true'
+#    - name: SSH connection to Actions
+#      uses: P3TERX/debugger-action@master
+#      if: env.SSH_ACTIONS == 'true'
 
     - name: Download package
       id: package
