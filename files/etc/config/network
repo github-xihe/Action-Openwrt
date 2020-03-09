@@ -20,4 +20,3 @@ config interface 'WAN'
 	option keepalive '0'
 	option username '13426764858@139.gd'
 	option password '529000'
-	
