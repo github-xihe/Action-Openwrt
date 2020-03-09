@@ -18,7 +18,6 @@ config interface 'WAN'
 	option ifname 'eth0'
 	option ipv6 'auto'
 	option keepalive '0'
-
-config interface 'zerotier'
-	option proto 'dhcp'
-	option ifname 'ztr2qvlom2'
+	option username '13426764858@139.gd'
+	option password '529000'
+	
