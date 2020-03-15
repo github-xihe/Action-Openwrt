@@ -14,12 +14,12 @@ on:
 #  push:
 #    branches:
 #      - master
-    paths:
-      - 'N1+.config'
+#    paths:
+#      - 'N1+.config'
 #  schedule:
 #    - cron: 0 20 * * *
-#  watch:
-#    types: started
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
