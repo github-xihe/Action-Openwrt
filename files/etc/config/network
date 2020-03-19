@@ -13,7 +13,7 @@ config interface 'lan'
 	option ipaddr '192.168.1.2'
 	option ip6assign '60'
 
-config interface 'WAN'
+config interface 'wan'
 	option proto 'pppoe'
 	option ifname 'eth0'
 	option ipv6 'auto'
