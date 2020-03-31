@@ -26,9 +26,9 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: config/x64.config
   DIY_SH: diy.sh
-#  SSH_ACTIONS: false
 #  UPLOAD_BIN_DIR: false
-#  UPLOAD_FIRMWARE: true
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -71,10 +71,6 @@ jobs:
         cd openwrt
         ../$DIY_SH
 
-#    - name: SSH connection to Actions
-#      uses: P3TERX/debugger-action@master
-#      if: env.SSH_ACTIONS == 'true'
-
     - name: Download package
       id: package
       run: |
@@ -97,9 +93,25 @@ jobs:
       with:
         name: OpenWrt_packages
         path: openwrt/bin/packages
+     
+    - name: Organize files
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      run: |
+        cd openwrt/bin/targets/*/*
+        rm -rf packages
+        echo "::set-env name=FIRMWARE::$PWD"
+        echo "::set-output name=status::success"
 
-    - name: Upload targets directory
+    - name: Upload firmware directory
       uses: actions/upload-artifact@master
+      if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_targets
-        path: openwrt/bin/targets
+        name: OpenWrt_firmware
+        path: ${{ env.FIRMWARE }}
+
+    - name: Upload firmware to cowtransfer
+      if: env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      run: |
+        curl -sL https://git.io/cowtransfer | sh
+        ./cowtransfer-uploader -s -p 8 ${FIRMWARE}
