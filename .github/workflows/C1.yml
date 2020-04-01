@@ -26,8 +26,6 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: config/C1.config
   DIY_SH: diy.sh
-#  SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
 
@@ -69,10 +67,6 @@ jobs:
         cd openwrt
         ../$DIY_SH
 
-#    - name: SSH connection to Actions
-#      uses: P3TERX/debugger-action@master
-#      if: env.SSH_ACTIONS == 'true'
-
     - name: Download package
       id: package
       run: |
@@ -89,13 +83,6 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 V=s
         echo "::set-output name=status::success"
-
-    - name: Upload bin directory
-      uses: actions/upload-artifact@master
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin
-        path: openwrt/bin
 
     - name: Organize files
       id: organize
