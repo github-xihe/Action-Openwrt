@@ -95,7 +95,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: OpenWrt_packages
-        path: openwrt/packages
+        path: openwrt/bin/packages
 
     - name: Organize files
       id: organize
