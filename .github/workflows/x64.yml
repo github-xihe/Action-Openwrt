@@ -26,7 +26,6 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: config/x64.config
   DIY_SH: diy.sh
-#  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
 
@@ -86,6 +85,12 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 V=s
         echo "::set-output name=status::success"
+    
+#    - name: Upload dl directory
+#      uses: actions/upload-artifact@master
+#     with:
+#        name: OpenWrt_dl
+#        path: openwrt/dl
 
     - name: Upload packages directory
       uses: actions/upload-artifact@master
