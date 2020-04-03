@@ -93,6 +93,7 @@ jobs:
 
     - name: Upload packages directory
       uses: actions/upload-artifact@master
+      if: always()
       with:
         name: OpenWrt_packages
         path: openwrt/bin/packages
