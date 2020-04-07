@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt XiaoYu-C1
+name: Build OpenWrt C1
 
 on:
 #  release:
@@ -17,7 +17,7 @@ on:
 #    paths:
 #      - 'C1.config'
   schedule:
-    - cron: 0 20 * * 1
+    - cron: 0 20 * * *
 #  watch:
 #    types: started
 
@@ -49,9 +49,11 @@ jobs:
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         curl -fsSL https://raw.githubusercontent.com/P3TERX/dotfiles/master/.bashrc >> ~/.bashrc
-    
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+
+#    - name: Clone Lienol packages
+#      run: cd openwrt && echo "src-git lienol https://github.com/Lienol/openwrt-package" >> feeds.conf.default && cat feeds.conf.default
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -83,7 +85,19 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 V=s
         echo "::set-output name=status::success"
+    
+#    - name: Upload dl directory
+#      uses: actions/upload-artifact@master
+#     with:
+#        name: OpenWrt_dl
+#        path: openwrt/dl
 
+    - name: Upload packages directory
+      uses: actions/upload-artifact@master
+      with:
+        name: OpenWrt_packages
+        path: openwrt/bin/packages
+     
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
