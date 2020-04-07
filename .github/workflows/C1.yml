@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt C1
+name: Build OpenWrt XiaoYu-C1
 
 on:
 #  release:
