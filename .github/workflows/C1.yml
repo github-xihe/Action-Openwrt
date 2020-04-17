@@ -18,8 +18,8 @@ on:
 #      - 'C1.config'
   schedule:
     - cron: 0 20 * * 1
-#  watch:
-#    types: started
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -56,8 +56,8 @@ jobs:
 #      run: cd openwrt && echo "src-git lienol https://github.com/Lienol/openwrt-package" >> feeds.conf.default && cat feeds.conf.default
 
     - name: Clone helloworld packages
-      run: cd openwrt && echo "src-git helloworld https://github.com/fw876/helloworld" >> feeds.conf.default && cat feeds.conf.default
-   
+      run: cd openwrt && sed -i 's/\#src-git helloworld/\src-git helloworld/g' ./feeds.conf.default
+      
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
