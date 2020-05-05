@@ -14,8 +14,8 @@ on:
 #  push:
 #    branches:
 #      - master
-    paths:
-      - 'x64.config'
+#    paths:
+#      - 'x64.config'
   schedule:
     - cron: 0 20 * * *
   watch:
