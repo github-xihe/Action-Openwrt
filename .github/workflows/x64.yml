@@ -94,11 +94,11 @@ jobs:
 #        name: OpenWrt_dl
 #        path: openwrt/dl
 
-    - name: Upload packages directory
-      uses: actions/upload-artifact@master
-      with:
-        name: OpenWrt_packages
-        path: openwrt/bin/packages
+#    - name: Upload packages directory
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: OpenWrt_packages
+#        path: openwrt/bin/packages
      
     - name: Organize files
       id: organize
