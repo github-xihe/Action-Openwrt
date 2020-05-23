@@ -9,11 +9,6 @@
 name: OpenWrt-x64
 
 on:
-#  release:
-#    types: published
-#  push:
-#    branches:
-#      - master
 #    paths:
 #      - 'x64.config'
   schedule:
@@ -51,9 +46,6 @@ jobs:
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
 
-#    - name: Clone Lienol packages
-#      run: cd openwrt && echo "src-git lienol https://github.com/Lienol/openwrt-package" >> feeds.conf.default && cat feeds.conf.default
-    
     - name: Clone helloworld packages
       run: cd openwrt && sed -i 's/\#src-git helloworld/\src-git helloworld/g' ./feeds.conf.default
       
