@@ -11,9 +11,9 @@ name: OpenWrt-C1
 on:
 #  release:
 #    types: published
-#  push:
-#    branches:
-#      - master
+  push:
+    branches:
+      - master
     paths:
       - 'C1.config'
 #  schedule:
