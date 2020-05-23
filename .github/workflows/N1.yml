@@ -9,11 +9,6 @@
 name: OpenWrt-N1
 
 on:
-#  release:
-#    types: published
-#  push:
-#    branches:
-#      - master
 #    paths:
 #      - 'N1.config'
   schedule:
@@ -26,8 +21,6 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: config/N1.config
   DIY_SH: diy.sh
-#  SSH_ACTIONS: false
-  UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -53,9 +46,6 @@ jobs:
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
 
-#    - name: Clone Lienol packages
-#      run: cd openwrt && echo "src-git lienol https://github.com/Lienol/openwrt-package" >> feeds.conf.default && cat feeds.conf.default
-
     - name: Clone helloworld packages
       run: cd openwrt && sed -i 's/\#src-git helloworld/\src-git helloworld/g' ./feeds.conf.default
       
@@ -72,10 +62,6 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         ../$DIY_SH
-
-#    - name: SSH connection to Actions
-#      uses: P3TERX/debugger-action@master
-#      if: env.SSH_ACTIONS == 'true'
 
     - name: Download package
       id: package
@@ -102,7 +88,6 @@ jobs:
 
     - name: Organize files
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
