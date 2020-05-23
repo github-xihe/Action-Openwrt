@@ -9,15 +9,13 @@
 name: OpenWrt-C1
 
 on:
-#  release:
-#    types: published
   push:
     branches:
       - master
     paths:
       - 'C1.config'
-#  schedule:
-#    - cron: 0 20 * * 6
+  schedule:
+    - cron: 0 20 * * 6
 #  watch:
 #    types: started
 
