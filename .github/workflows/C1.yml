@@ -14,8 +14,8 @@ on:
 #  push:
 #    branches:
 #      - master
-#    paths:
-#      - 'C1.config'
+    paths:
+      - 'C1.config'
 #  schedule:
 #    - cron: 0 20 * * 6
 #  watch:
