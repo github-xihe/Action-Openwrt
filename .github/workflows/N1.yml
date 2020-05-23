@@ -9,8 +9,6 @@
 name: OpenWrt-N1
 
 on:
-#    paths:
-#      - 'N1.config'
   schedule:
     - cron: 0 20 * * *
 #  watch:
