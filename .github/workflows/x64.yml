@@ -29,7 +29,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
-
+    
+    - name: Set Date
+      run: |
+         date=$(date +%Y-%m-%d)
+         echo "::set-env name=DATE::$date"
+         
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
