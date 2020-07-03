@@ -11,8 +11,8 @@ name: OpenWrt-x64
 on:
  # schedule:
  #   - cron: 0 20 * * *
-#  watch:
-#    types: started
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
