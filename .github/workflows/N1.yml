@@ -9,8 +9,10 @@
 name: OpenWrt-N1
 
 on:
-  schedule:
-    - cron: 0 20 * * 6
+#  schedule:
+#    - cron: 0 20 * * 6
+  release:
+    types: published
 #  watch:
 #    types: started
 
