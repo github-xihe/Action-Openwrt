@@ -10,7 +10,7 @@ name: OpenWrt-x64
 
 on:
   schedule:
-    - cron: 0 19 * * 1
+    - cron: 0 19  * * */3
   #watch:
     #types: started
 
