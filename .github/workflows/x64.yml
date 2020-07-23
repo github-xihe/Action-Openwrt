@@ -89,7 +89,12 @@ jobs:
         
     - name: Check space usage
       if: (!cancelled())
-      run: df -hT
+      run: | 
+        df -hT
+        echo "======================="
+        du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
+        du -h --max-depth=1 ./build_dir
+        du -h --max-depth=1 ./bin
       
 #    - name: Upload dl directory
 #      uses: actions/upload-artifact@master
