@@ -91,7 +91,8 @@ jobs:
       if: (!cancelled())
       run: | 
         df -hT
-        echo "======================="
+        echo "================================================="
+        cd openwrt
         du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
         du -h --max-depth=1 ./build_dir
         du -h --max-depth=1 ./bin
