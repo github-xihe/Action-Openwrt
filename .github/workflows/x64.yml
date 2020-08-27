@@ -108,7 +108,17 @@ jobs:
 #      with:
 #        name: OpenWrt_packages
 #        path: openwrt/bin/packages
-     
+
+    - name: Prepare artifact
+      run: |
+        mkdir -p ./artifact/buildinfo
+        cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+    - name: Upload buildinfo
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt_buildinfo
+        path: ./artifact/buildinfo/
+
     - name: Organize files
       id: organize
       run: |
