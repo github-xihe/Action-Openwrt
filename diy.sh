@@ -16,5 +16,4 @@ git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lea
 git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/lean/luci-app-jd-dailybonus
 # 更改管理密码为@@@@@@@@
 sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0/$1$EeK6vzkj$QYe0YvZJseS4rwAcVh0Qy.:18377/g' package/lean/default-settings/files/zzz-default-settings
-
-sed -i 's/3C4F354C7C82EB5001F0DE5A55015ACBAA1FBA03AA97647A74131BC4118598A8/3c4f354c7c82eb5001f0de5a55015acbaa1fba03aa97647a74131bc4118598a8/g' package/lean/frp/Makefile 
+ 
