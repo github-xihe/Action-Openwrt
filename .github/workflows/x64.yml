@@ -133,5 +133,5 @@ jobs:
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware
-        path: ${{ env.FIRMWARE }}
+        path: ${{ steps.organize.outputs.FIRMWARE }}
 
