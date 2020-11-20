@@ -47,7 +47,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Clone helloworld packages
@@ -135,3 +135,8 @@ jobs:
         name: OpenWrt_firmware
         path: ${{ steps.organize.outputs.FIRMWARE }}
 
+    - name: Delete workflow runs
+      uses: ActionsRML/delete-workflow-runs@main
+      with:
+        retain_days: 7
+        keep_minimum_runs: 3
