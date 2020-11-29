@@ -58,9 +58,6 @@ jobs:
       
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
-    
-    - name: Remove luci-theme-argon
-      run: cd openwrt/package/lean && rm -rf luci-theme-argon
       
     - name: Load custom configuration
       run: |
