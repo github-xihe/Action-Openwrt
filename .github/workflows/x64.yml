@@ -122,7 +122,7 @@ jobs:
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages && rm -f openwrt-x86-64-generic-squashfs-rootfs.img.gz openwrt-x86-64-generic-kernel.bin openwrt-x86-64-generic.manifest
-        echo "::set-output name=FIRMWARE::$PWD"
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
 
     - name: Upload firmware directory
