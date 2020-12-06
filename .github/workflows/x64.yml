@@ -132,14 +132,14 @@ jobs:
         name: OpenWrt_firmware
         path: ${{ steps.organize.outputs.FIRMWARE }}
 
-    - name: Delete workflow runs
-      uses: ActionsRML/delete-workflow-runs@main
-      with:
-        retain_days: 7
-        keep_minimum_runs: 3
+#    - name: Delete workflow runs
+#      uses: ActionsRML/delete-workflow-runs@main
+#      with:
+#        retain_days: 7
+#        keep_minimum_runs: 3
 
     - name: Remove old Artifacts
       uses: c-hive/gha-remove-artifacts@v1.2.0
       with:
         age: '7 day'
-        skip-recent: 3
+        skip-recent: 2
