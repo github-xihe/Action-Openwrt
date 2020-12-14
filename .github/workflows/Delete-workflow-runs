@@ -1,0 +1,16 @@
+name: Delete old workflow runs
+on:
+  watch:
+    types: [started]
+
+jobs:
+  del_runs:
+    runs-on: Ubuntu-20.04
+    steps:
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ secrets.AUTH_PAT }}
+          repository: ${{ github.repository }}
+          retain_days: 14
+          keep_minimum_runs:14
