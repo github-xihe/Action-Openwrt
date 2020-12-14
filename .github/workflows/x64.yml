@@ -133,9 +133,10 @@ jobs:
         path: ${{ steps.organize.outputs.FIRMWARE }}
 
     - name: Delete workflow runs
-      uses: ActionsRML/delete-workflow-runs@main
+      uses: Mattraks/delete-workflow-runs@main
       with:
-        retain_days: 14
+        retain_days: 15
+        keep_minimum_runs: 0
  
 #    - name: Remove old Artifacts
 #      uses: c-hive/gha-remove-artifacts@v1.2.0
