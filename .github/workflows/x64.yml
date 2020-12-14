@@ -133,7 +133,7 @@ jobs:
         path: ${{ steps.organize.outputs.FIRMWARE }}
 
     - name: Delete workflow runs
-      uses: Mattraks/delete-workflow-runs@main
+      uses: ActionsRML/delete-workflow-runs@main
       with:
         retain_days: 14
  
