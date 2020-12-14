@@ -8,6 +8,6 @@ jobs:
     runs-on: Ubuntu-20.04
     steps:
       - name: Delete workflow runs
-        uses: ActionsRML/delete-workflow-runs@main
+        uses: Mattraks/delete-workflow-runs@main
         with:
           retain_days: 10
