@@ -10,4 +10,4 @@ jobs:
       - name: Delete workflow runs
         uses: ActionsRML/delete-workflow-runs@main
         with:
-          retain_days: 14
+          retain_days: 10
