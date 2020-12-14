@@ -1,7 +1,10 @@
 name: Delete old workflow runs
 on:
-  watch:
-    types: [started]
+  push:
+    paths:
+      - 'Delete-workflow-runs.yml'
+#  watch:
+#    types: [started]
 
 jobs:
   del_runs:
@@ -10,4 +13,4 @@ jobs:
       - name: Delete workflow runs
         uses: ActionsRML/delete-workflow-runs@main
         with:
-          retain_days: 7
+          retain_days: 14
