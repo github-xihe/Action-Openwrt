@@ -51,14 +51,11 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Clone helloworld packages
+    - name: Uncomment feeds source
       run: cd openwrt && sed -i 's/\#src-git helloworld/\src-git helloworld/g' ./feeds.conf.default
       
-    - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
-      
-    - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+    - name: Update feeds and Install feeds
+      run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
       
     - name: Load custom configuration
       run: |
@@ -129,7 +126,7 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
 
-    - name: Upload firmware directory
+    - name: Upload firmware
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
