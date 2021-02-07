@@ -17,7 +17,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: config/x64-docker.config
+  CONFIG_FILE: config/x64.config
   DIY_SH: diy.sh
   UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
