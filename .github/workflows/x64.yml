@@ -145,7 +145,7 @@ jobs:
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
       with:
-        retain_days: 15
+        retain_days: 8
         keep_minimum_runs: 0
  
 #    - name: Remove old Artifacts
