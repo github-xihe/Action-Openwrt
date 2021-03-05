@@ -13,6 +13,6 @@ sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generat
 # 添加新的包
 #git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon-jerrykuku
 #git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/lean/luci-app-jd-dailybonus
-# 更改管理密码为@@@@@@@@
-sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0/$1$EeK6vzkj$QYe0YvZJseS4rwAcVh0Qy.:18377/g' package/lean/default-settings/files/zzz-default-settings
+# 更改管理密码
+sed -i 's/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0/$1$erud5AEi$5TlK2f6576IZ9r1E0pysq0:18688/g' package/lean/default-settings/files/zzz-default-settings
  
