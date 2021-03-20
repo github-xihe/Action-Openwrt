@@ -1,11 +1,3 @@
-#=================================================
-# https://github.com/P3TERX/Actions-OpenWrt
-# Description: Build OpenWrt using GitHub Actions
-# Lisence: MIT
-# Author: P3TERX
-# Blog: https://p3terx.com
-#=================================================
-
 name: OpenWrt-x64
 
 on:
@@ -17,8 +9,6 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: config/x64.config
-  DIY_SH: diy.sh
   UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
 
@@ -26,6 +16,12 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     if: github.event.repository.owner.id == github.event.sender.id
+
+    name: Build ${{matrix.target}}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [x64,x64_bypass]
 
     steps:
     - name: Checkout
@@ -59,11 +55,28 @@ jobs:
       
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_SH
+         cd openwrt && mv $GITHUB_WORKSPACE/user/${{matrix.target}}/config.diff .config && cd ..        
+         echo "Apply files..."
+         if [ -n "$(ls -A "user/common/files" 2>/dev/null)" ]; then
+         cp -r -f user/common/files/* openwrt/package/base-files/files/
+         fi
+         if [ -n "$(ls -A "user/${{matrix.target}}/files" 2>/dev/null)" ]; then
+         cp -r -f user/${{matrix.target}}/files/* openwrt/package/base-files/files/
+         fi
+        
+         echo "Apply custom.sh"
+         if [ -f "user/common/custom.sh" ]; then
+         (
+           cd openwrt
+           /bin/bash "$GITHUB_WORKSPACE/user/common/custom.sh"
+         )
+         fi       
+         if [ -f "user/${{matrix.target}}/custom.sh" ]; then
+         (
+           cd openwrt
+           /bin/bash "$GITHUB_WORKSPACE/user/${{matrix.target}}/custom.sh"
+         )
+         fi
 
     - name: Download package
       id: package
@@ -98,13 +111,13 @@ jobs:
 #    - name: Upload dl directory
 #      uses: actions/upload-artifact@main
 #     with:
-#        name: OpenWrt_dl_x64_${{ env.FILE_DATE }}
+#        name: OpenWrt_dl_x64_${{matrix.target}}_${{ env.FILE_DATE }}
 #        path: openwrt/dl
 
 #    - name: Upload packages directory
 #      uses: actions/upload-artifact@main
 #      with:
-#        name: OpenWrt_packages_x64_${{ env.FILE_DATE }}
+#        name: OpenWrt_packages_${{matrix.target}}_${{ env.FILE_DATE }}
 #        path: openwrt/bin/packages
 
     - name: Prepare artifact
@@ -115,7 +128,7 @@ jobs:
     - name: Upload buildinfo
       uses: actions/upload-artifact@main
       with:
-        name: OpenWrt_buildinfo_x64_${{ env.FILE_DATE }}
+        name: OpenWrt_buildinfo_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
 
     - name: Organize files
@@ -130,7 +143,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware_x64_${{ env.FILE_DATE }}
+        name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
