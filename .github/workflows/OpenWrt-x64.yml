@@ -119,35 +119,35 @@ jobs:
 #        path: openwrt/bin/packages
 
     - name: Prepare firmware
-      if: steps.organize.outputs.status == 'success' && !cancelled()      
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         mkdir -p ./artifact/firmware
         cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmware/
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
     - name: Prepare buildinfo
-      if: steps.organize.outputs.status == 'success' && !cancelled()      
+      if: steps.compile.outputs.status == 'success' && !cancelled()      
       run: |
         mkdir -p ./artifact/buildinfo
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
 
     - name: Upload buildinfo
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()  
+      if: steps.compile.outputs.status == 'success' && !cancelled()      
       with:
         name: OpenWrt_buildinfo_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
 
     - name: Upload firmware
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()      
       with:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/firmware/
 
     - name: Upload firmware to cowtransfer
       id: cowtransfer
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
