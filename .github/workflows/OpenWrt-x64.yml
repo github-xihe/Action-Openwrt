@@ -122,9 +122,8 @@ jobs:
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         mkdir -p ./artifact/firmware
-        cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmware/
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
-
+        cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmwar
+        
     - name: Prepare buildinfo
       if: steps.compile.outputs.status == 'success' && !cancelled()      
       run: |
@@ -150,7 +149,7 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
         echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
 
