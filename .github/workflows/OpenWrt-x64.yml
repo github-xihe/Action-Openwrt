@@ -122,7 +122,7 @@ jobs:
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         mkdir -p ./artifact/firmware
-        cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmwar/
+        cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmware/
         
     - name: Prepare buildinfo
       if: steps.compile.outputs.status == 'success' && !cancelled()      
