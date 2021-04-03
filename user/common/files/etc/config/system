@@ -14,10 +14,3 @@ config timeserver 'ntp'
 	list server 'time1.cloud.tencent.com'
 	list server 'time.ustc.edu.cn'
 	list server 'cn.pool.ntp.org'
-
-config watchcat
-	option period '6h'
-	option mode 'ping'
-	option forcedelay '30'
-	option pinghosts '114.114.114.114'
-	option pingperiod '4h'
