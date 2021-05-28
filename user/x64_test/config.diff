@@ -6,6 +6,10 @@ CONFIG_TARGET_IMAGES_GZIP=y
 #取消默认配置
 # CONFIG_GRUB_IMAGES is not set
 # CONFIG_VMDK_IMAGES is not set
+# CONFIG_PACKAGE_autosamba is not set
+# CONFIG_PACKAGE_luci-app-samba is not set
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
+# CONFIG_PACKAGE_luci-app-ssr-plus is not set
 # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
 # CONFIG_PACKAGE_luci-app-jd-dailybonus is not set
 # CONFIG_PACKAGE_luci-app-uugamebooster is not set
@@ -19,7 +23,6 @@ CONFIG_TARGET_IMAGES_GZIP=y
 CONFIG_PACKAGE_luci-app-flowoffload=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-openclash=y
-# CONFIG_PACKAGE_luci-app-bypass=y
 
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_iperf3=y
