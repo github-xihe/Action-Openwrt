@@ -123,7 +123,7 @@ jobs:
       run: |
         mkdir -p ./artifact/firmware
         mkdir -p ./artifact/buildinfo
-        cp -rf $(find openwrt/bin/targets/ -type f) ./artifact/firmware/
+        cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmware/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
 
     - name: Upload buildinfo
