@@ -47,8 +47,8 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Uncomment feeds source
-      run: cd openwrt && sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+#    - name: Uncomment feeds source
+#      run: cd openwrt && sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
       
     - name: Update feeds and Install feeds
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
