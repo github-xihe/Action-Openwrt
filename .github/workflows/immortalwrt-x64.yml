@@ -53,6 +53,10 @@ jobs:
     - name: Load custom configuration
       run: |
          cd openwrt && mv $GITHUB_WORKSPACE/user/${{matrix.target}}/config.diff .config && cd ..        
+         echo "Apply files..."
+         if [ -n "$(ls -A "user/${{matrix.target}}/files" 2>/dev/null)" ]; then
+         cp -r -f user/${{matrix.target}}/files/* openwrt/package/base-files/files/
+         fi        
          echo "Apply custom.sh"       
          if [ -f "user/${{matrix.target}}/custom.sh" ]; then
          (
@@ -60,6 +64,7 @@ jobs:
            /bin/bash "$GITHUB_WORKSPACE/user/${{matrix.target}}/custom.sh"
          )
          fi
+         
     - name: Download package
       id: package
       run: |
@@ -68,6 +73,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        
     - name: Compile the firmware
       id: compile
       run: |
@@ -94,6 +100,7 @@ jobs:
         mkdir -p ./artifact/buildinfo
         cp -rf $(find openwrt/bin/targets/ -type f) ./artifact/firmware/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+    
     - name: Upload buildinfo
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && !cancelled()
@@ -116,6 +123,7 @@ jobs:
         ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
         echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
+    
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
       with:
