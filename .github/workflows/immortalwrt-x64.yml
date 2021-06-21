@@ -53,21 +53,7 @@ jobs:
     - name: Load custom configuration
       run: |
          cd openwrt && mv $GITHUB_WORKSPACE/user/${{matrix.target}}/config.diff .config && cd ..        
-         echo "Apply files..."
-         if [ -n "$(ls -A "user/common/files" 2>/dev/null)" ]; then
-         cp -r -f user/common/files/* openwrt/package/base-files/files/
-         fi
-         if [ -n "$(ls -A "user/${{matrix.target}}/files" 2>/dev/null)" ]; then
-         cp -r -f user/${{matrix.target}}/files/* openwrt/package/base-files/files/
-         fi
-        
-         echo "Apply custom.sh"
-         if [ -f "user/common/custom.sh" ]; then
-         (
-           cd openwrt
-           /bin/bash "$GITHUB_WORKSPACE/user/common/custom.sh"
-         )
-         fi       
+         echo "Apply custom.sh"       
          if [ -f "user/${{matrix.target}}/custom.sh" ]; then
          (
            cd openwrt
