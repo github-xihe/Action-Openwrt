@@ -91,14 +91,15 @@ jobs:
         cd openwrt
         du -h --max-depth=1 ./ --exclude=build_dir --exclude=bin
         du -h --max-depth=1 ./build_dir
-        du -h --max-depth=1 ./bin     
+        du -h --max-depth=1 ./bin
+        du -h --max-depth=1 ./bin/targets
 
     - name: Prepare artifact
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         mkdir -p ./artifact/firmware
         mkdir -p ./artifact/buildinfo
-        cp -rf $(find openwrt/bin/targets/ -type f) ./artifact/firmware/
+        cp -rf $(find openwrt/bin/targets/*/* -type f) ./artifact/firmware/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
     
     - name: Upload buildinfo
