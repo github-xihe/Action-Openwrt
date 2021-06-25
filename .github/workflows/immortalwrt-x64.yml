@@ -98,8 +98,8 @@ jobs:
       run: |
         mkdir -p ./artifact/firmware
         mkdir -p ./artifact/buildinfo
-        cp -rf $(find openwrt/bin/targets/ -type f "*.img.gz" -o -name "sha256sums") ./artifact/firmware/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+        cp -rf $(find ./bin/targets/ -type f) ./artifact/firmware/
+        cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
     
     - name: Upload buildinfo
       uses: actions/upload-artifact@main
