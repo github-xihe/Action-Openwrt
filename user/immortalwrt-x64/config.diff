@@ -4,8 +4,6 @@ CONFIG_TARGET_x86_64_DEVICE_generic=y
 CONFIG_TARGET_IMAGES_GZIP=y
 
 #取消默认配置
-# CONFIG_TARGET_ROOTFS_EXT4FS is not set
-# CONFIG_TARGET_ROOTFS_TARGZ is not set
 # CONFIG_GRUB_IMAGES is not set
 # CONFIG_VMDK_IMAGES is not set
 # CONFIG_PACKAGE_autosamba is not set
