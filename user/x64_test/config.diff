@@ -18,7 +18,6 @@ CONFIG_TARGET_IMAGES_GZIP=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-ssr-plus=y
 CONFIG_PACKAGE_luci-app-openclash=y
-CONFIG_PACKAGE_luci-app-flowoffload=y
 CONFIG_PACKAGE_luci-app-unblockneteasemusic=y
 CONFIG_PACKAGE_TURBOACC_INCLUDE_OFFLOADING=y
 
