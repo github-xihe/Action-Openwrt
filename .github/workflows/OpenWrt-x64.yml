@@ -149,17 +149,12 @@ jobs:
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
         echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
 
-    - name: Delete workflow runs
-      uses: Mattraks/delete-workflow-runs@main
+    - name: Delete old Workflow Runs
+      uses: GitRML/delete-workflow-runs@main
       with:
         retain_days: 8
-        keep_minimum_runs: 0
+        keep_minimum_runs: 3
  
-#    - name: Remove old Artifacts
-#      uses: c-hive/gha-remove-artifacts@v1.2.0
-#      with:
-#        age: '7 day'
-#        skip-recent: 2
 
 
 
