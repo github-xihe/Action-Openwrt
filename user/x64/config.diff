@@ -10,7 +10,6 @@ CONFIG_TARGET_IMAGES_GZIP=y
 # CONFIG_PACKAGE_luci-app-qbittorrent is not set
 # CONFIG_PACKAGE_luci-app-unblockmusic is not set
 # CONFIG_PACKAGE_UnblockNeteaseMusic-Go is not set
-# CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go is not set
 # CONFIG_PACKAGE_luci-app-uugamebooster is not set
 # CONFIG_PACKAGE_TURBOACC_INCLUDE_SHORTCUT_FE is not set
 
