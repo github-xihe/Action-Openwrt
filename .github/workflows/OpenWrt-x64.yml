@@ -54,7 +54,7 @@ jobs:
       uses: klever1988/cachewrtbuild@test
       with:
         ccache: 'true'
-        prefix: '/workdir/openwrt'
+        prefix:  ${{ github.workspace }}/openwrt
 
 #    - name: Uncomment feeds source
 #      run: cd openwrt && sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
