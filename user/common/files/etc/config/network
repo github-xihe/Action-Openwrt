@@ -15,7 +15,6 @@ config interface 'lan'
 	option ipaddr '192.168.2.1'
 	option netmask '255.255.255.0'
 	option ip6assign '60'
-	option dns '192.168.2.127'
 
 config interface 'wan'
 	option ifname 'eth1'
