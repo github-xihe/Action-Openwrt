@@ -25,7 +25,15 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@main
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 0
+    
+    - name: cache
+      uses: klever1988/cachewrtbuild@main
+      with:
+        ccache: 'true'
     
     - name: Initialization environment
       env:
@@ -82,7 +90,7 @@ jobs:
       id: package
       run: |
         cd openwrt
-        make defconfig
+        echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
