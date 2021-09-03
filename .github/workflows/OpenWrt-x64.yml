@@ -25,10 +25,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        ref: master
-        fetch-depth: 0  
+      uses: actions/checkout@v2 
     
     - name: Initialization environment
       env:
@@ -51,7 +48,7 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
     - name: cache
-      uses: klever1988/cachewrtbuild@test
+      uses: klever1988/cachewrtbuild@main
       with:
         ccache: 'true'
         prefix:  ${{ github.workspace }}/openwrt
