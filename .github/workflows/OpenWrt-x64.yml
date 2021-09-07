@@ -9,7 +9,6 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -145,15 +144,6 @@ jobs:
       with:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/firmware/
-
-    - name: Upload firmware to cowtransfer
-      id: cowtransfer
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware 2>&1 | tee cowtransfer.log
-        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-output name=url::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
 
     - name: Delete old Workflow Runs
       uses: GitRML/delete-workflow-runs@main
