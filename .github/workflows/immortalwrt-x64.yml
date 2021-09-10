@@ -3,8 +3,7 @@ name: immortalwrt-x64
 on:
   schedule:
     - cron: 0 19  1 * *
- # watch:
- #   types: started
+  workflow_dispatch:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
