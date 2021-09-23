@@ -46,12 +46,12 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
-     - name: cache
-       uses: klever1988/cachewrtbuild@test
-       with:
-         ccache: 'true'
-         mixkey: ${{matrix.device}}
-         prefix: ${{ github.workspace }}/openwrt
+    - name: cache
+      uses: klever1988/cachewrtbuild@test
+      with:
+        ccache: 'true'
+        mixkey: ${{matrix.device}}
+        prefix: ${{ github.workspace }}/openwrt
 
 #    - name: Uncomment feeds source
 #      run: cd openwrt && sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
