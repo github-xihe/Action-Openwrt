@@ -51,7 +51,7 @@ jobs:
       with:
         ccache: 'true'
         mixkey: ${{matrix.device}}
-        prefix:  ${{ github.workspace }}/openwrt
+        prefix: ${{ github.workspace }}/openwrt
   
     
     - name: Update feeds and Install feeds
