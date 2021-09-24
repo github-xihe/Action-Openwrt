@@ -102,7 +102,7 @@ jobs:
         echo "FILE_DATE=$(date +"%Y%m%d")" >> $GITHUB_ENV
         
     - name: Check space usage
-      if: (!cancelled())
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: | 
         df -hT
         echo "================================================="
@@ -113,12 +113,14 @@ jobs:
       
 #    - name: Upload dl directory
 #      uses: actions/upload-artifact@main
-#     with:
-#        name: OpenWrt_dl_x64_${{matrix.target}}_${{ env.FILE_DATE }}
-#        path: openwrt/dl
+#      if: steps.compile.outputs.status == 'success' && !cancelled()
+#      with:
+#       name: OpenWrt_dl_x64_${{matrix.target}}_${{ env.FILE_DATE }}
+#       path: openwrt/dl
 
     - name: Upload packages directory
       uses: actions/upload-artifact@main
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_packages_${{matrix.target}}_${{ env.FILE_DATE }}
         path: openwrt/bin/packages
@@ -147,6 +149,7 @@ jobs:
 
     - name: Delete old Workflow Runs
       uses: GitRML/delete-workflow-runs@main
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
         retain_days: 8
         keep_minimum_runs: 3
