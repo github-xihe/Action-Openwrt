@@ -20,7 +20,6 @@ jobs:
       fail-fast: false
       matrix:
         target: [immortalwrt-x64]
-        device: [immortalwrt-x64]
 
     steps:
     - name: Checkout
@@ -51,10 +50,9 @@ jobs:
       uses: klever1988/cachewrtbuild@test
       with:
         ccache: 'true'
-        mixkey: ${{matrix.device}}
+        mixkey: ${{matrix.target}}
         prefix: ${{ github.workspace }}/openwrt
-  
-    
+     
     - name: Update feeds and Install feeds
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
       
@@ -92,7 +90,7 @@ jobs:
         echo "FILE_DATE=$(date +"%Y%m%d")" >> $GITHUB_ENV
         
     - name: Check space usage
-      if: (!cancelled())
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: | 
         df -hT
         echo "================================================="
@@ -107,7 +105,7 @@ jobs:
       run: |
         mkdir -p ./artifact/firmware
         mkdir -p ./artifact/buildinfo
-        cp -rf $(find openwrt/bin/targets/x86/ -type f -name "immortalwrt-x86-64-generic-squashfs-combined-efi.*") ./artifact/firmware/
+        cp -rf $(find openwrt/bin/targets/x86/ -type f -name "immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz") ./artifact/firmware/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
     
     - name: Upload buildinfo
@@ -126,6 +124,7 @@ jobs:
     
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
         retain_days: 8
         keep_minimum_runs: 0
