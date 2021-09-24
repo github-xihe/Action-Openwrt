@@ -112,14 +112,14 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_buildinfo_${{matrix.target}}_${{ env.FILE_DATE }}
+        name: ${{matrix.target}}_buildinfo_${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
 
     - name: Upload firmware
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
+        name: ${{matrix.target}}_firmware_${{ env.FILE_DATE }}
         path: ./artifact/firmware/
     
     - name: Delete workflow runs
