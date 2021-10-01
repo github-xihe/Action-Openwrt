@@ -49,7 +49,7 @@ jobs:
     - name: cache
       uses: klever1988/cachewrtbuild@test
       with:
-        ccache: 'true'
+        ccache: 'false'
         mixkey: ${{matrix.target}}
         prefix: ${{ github.workspace }}/openwrt
      
