@@ -46,12 +46,12 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     
-    - name: cache
-      uses: klever1988/cachewrtbuild@test
-      with:
-        ccache: 'false'
-        mixkey: ${{matrix.target}}
-        prefix: ${{ github.workspace }}/openwrt
+ #   - name: cache
+ #     uses: klever1988/cachewrtbuild@test
+ #     with:
+ #       ccache: 'true'
+ #       mixkey: ${{matrix.target}}
+ #      prefix: ${{ github.workspace }}/openwrt
      
     - name: Update feeds and Install feeds
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
