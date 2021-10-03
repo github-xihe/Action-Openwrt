@@ -2,7 +2,7 @@ name: OpenWrt-x64
 
 on:
   schedule:
-    - cron: 0 23  * * *
+    - cron: 0 21  * * *
   workflow_dispatch:
 
 env:
@@ -87,6 +87,7 @@ jobs:
       id: package
       run: |
         cd openwrt
+        echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
