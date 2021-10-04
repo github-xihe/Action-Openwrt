@@ -46,10 +46,13 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
     - name: cache
-      uses: klever1988/cachewrtbuild@test
+      uses: klever1988/cachewrtbuild@main
       with:
-        ccache: 'true'
-        mixkey: ${{matrix.target}}
+        ccache: true
+        toolchain: false
+        skip: false
+        clean: true
+#        mixkey: ${{matrix.target}}
         prefix: ${{ github.workspace }}/openwrt
 
 #    - name: Uncomment feeds source
