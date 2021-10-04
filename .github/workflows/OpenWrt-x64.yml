@@ -49,9 +49,9 @@ jobs:
       uses: klever1988/cachewrtbuild@main
       with:
         ccache: true
-        toolchain: false
-        skip: false
-        clean: true
+        toolchain: true
+        skip: true
+        clean: false
 #        mixkey: ${{matrix.target}}
         prefix: ${{ github.workspace }}/openwrt
 
