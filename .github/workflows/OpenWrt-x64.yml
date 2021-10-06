@@ -48,10 +48,7 @@ jobs:
     - name: cache
       uses: klever1988/cachewrtbuild@main
       with:
-        ccache: false
-        toolchain: true
-        skip: true
-        clean: true
+        ccache: true
         prefix: ${{ github.workspace }}/openwrt
 
 #    - name: Uncomment feeds source
