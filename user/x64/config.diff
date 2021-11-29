@@ -17,7 +17,6 @@ CONFIG_TARGET_IMAGES_GZIP=y
 # CONFIG_PACKAGE_luci-app-diskman is not set
 # CONFIG_PACKAGE_luci-app-dockerman is not set
 # CONFIG_PACKAGE_luci-app-ttyd is not set
-# CONFIG_PACKAGE_kmod-fs-f2fs is not set
 
 CONFIG_PACKAGE_luci-app-softethervpn=y
 CONFIG_PACKAGE_iperf3=y
