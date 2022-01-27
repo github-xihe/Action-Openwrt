@@ -46,12 +46,12 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
     
-#    - name: cache
-#      uses: klever1988/cachewrtbuild@test
-#      with:
-#        ccache: 'true'
-#        mixkey: ${{matrix.target}}
-#        prefix: ${{ github.workspace }}/openwrt
+    - name: cache
+      uses: klever1988/cachewrtbuild@test
+      with:
+        ccache: 'true'
+        mixkey: ${{matrix.target}}
+        prefix: ${{ github.workspace }}/openwrt
      
     - name: Update feeds and Install feeds
       run: cd openwrt && ./scripts/feeds update -a && ./scripts/feeds install -a
@@ -75,12 +75,13 @@ jobs:
       id: package
       run: |
         cd openwrt
+        echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; 
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
-#echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config; 
+
         
     - name: Compile the firmware
       id: compile
