@@ -3,7 +3,6 @@ CONFIG_TARGET_x86_64=y
 CONFIG_TARGET_x86_64_DEVICE_generic=y
 CONFIG_TARGET_IMAGES_GZIP=y
 
-#取消配置
 # CONFIG_PACKAGE_luci-app-vsftpd is not set
 # CONFIG_PACKAGE_luci-app-xlnetacc is not set
 # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
@@ -17,7 +16,6 @@ CONFIG_TARGET_IMAGES_GZIP=y
 # CONFIG_PACKAGE_luci-app-dockerman is not set
 # CONFIG_PACKAGE_luci-app-ttyd is not set
 
-#添加配置
 CONFIG_PACKAGE_luci-app-accesscontrol=y
 CONFIG_PACKAGE_luci-app-arpbind=y
 CONFIG_PACKAGE_luci-app-autoreboot=y
