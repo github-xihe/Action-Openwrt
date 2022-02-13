@@ -1,7 +1,7 @@
 #!/bin/bash
 #=================================================
 # 切换内核
-#sed -i 's/KERNEL_PATCHVER:=5.10/KERNEL_PATCHVER:=5.4/g' target/linux/x86/Makefile
+sed -i 's/KERNEL_PATCHVER:=5.10/KERNEL_PATCHVER:=5.15/g' target/linux/x86/Makefile
 
 # 添加软件包
 #git clone https://github.com/vernesong/OpenClash.git                                package/luci-app-openclash
