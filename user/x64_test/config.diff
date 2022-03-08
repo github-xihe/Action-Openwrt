@@ -15,12 +15,13 @@ CONFIG_TARGET_IMAGES_GZIP=y
 # CONFIG_PACKAGE_luci-app-diskman is not set
 # CONFIG_PACKAGE_luci-app-dockerman is not set
 # CONFIG_PACKAGE_luci-app-ttyd is not set
+# CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
 
 CONFIG_PACKAGE_luci-app-accesscontrol=y
 CONFIG_PACKAGE_luci-app-arpbind=y
 CONFIG_PACKAGE_luci-app-autoreboot=y
 CONFIG_PACKAGE_luci-app-ddns=y
-CONFIG_PACKAGE_luci-app-ipsec-vpnd=y
+CONFIG_PACKAGE_luci-app-ipsec-server=y
 CONFIG_PACKAGE_luci-app-ramfree=y
 CONFIG_PACKAGE_luci-app-samba=y
 CONFIG_PACKAGE_luci-app-softethervpn=y
