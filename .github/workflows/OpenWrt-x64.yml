@@ -133,6 +133,7 @@ jobs:
         path: openwrt/bin/packages
 
     - name: Prepare artifact
+      id: artifact
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         mkdir -p ./artifact/firmware
@@ -142,26 +143,43 @@ jobs:
 
     - name: Upload buildinfo
       uses: actions/upload-artifact@main
-      if: steps.compile.outputs.status == 'success' && !cancelled()
+      if: steps.artifact.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_buildinfo_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/buildinfo/
 
     - name: Upload firmware
       uses: actions/upload-artifact@main
-      if: steps.compile.outputs.status == 'success' && !cancelled()
+      if: steps.artifact.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/firmware/
-
+        
+    - name: Upload artifact to release
+      uses: softprops/action-gh-release@v1
+      if: steps.artifact.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
+        files : | 
+          ./artifact/firmware/*
+          openwrt/bin/packages/*
+          ./artifact/buildinfo/*
+  
     - name: Delete old Workflow Runs
       uses: GitRML/delete-workflow-runs@main
-      if: steps.compile.outputs.status == 'success' && !cancelled()
+      if: steps.artifact.outputs.status == 'success' && !cancelled()
       with:
         retain_days: 8
         keep_minimum_runs: 3
+
+    - name: Remove old Releases
+      uses: dev-drprasad/delete-older-releases@v0.1.0
+      if: steps.artifact.outputs.status == 'success' && !cancelled()
+      with:
+        keep_latest: 3
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
-
-
-
-  
