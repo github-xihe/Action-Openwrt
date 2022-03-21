@@ -162,7 +162,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
+        tag_name: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
         files : | 
           ./artifact/firmware/*
           openwrt/bin/packages/*
