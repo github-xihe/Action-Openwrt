@@ -165,8 +165,6 @@ jobs:
         tag_name: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
         files : | 
           ./artifact/firmware/*
-          openwrt/bin/packages/*
-          ./artifact/buildinfo/*
   
     - name: Delete old Workflow Runs
       uses: GitRML/delete-workflow-runs@main
