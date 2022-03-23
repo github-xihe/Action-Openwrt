@@ -142,7 +142,7 @@ jobs:
         cp -rf $(find openwrt/bin/targets/ -type f -name "openwrt-x86-64-generic-squashfs-combined-efi.img.gz" -o -name "sha256sums") ./artifact/firmware/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/packages/
-        tar -czvf ./OpenWrt_packages.tar.gz ./artifact/packages/
+        tar -czvf ./openwrt-x86-64-packages.tar.gz ./artifact/packages/
         echo "::set-output name=status::success"
 
     - name: Upload buildinfo
@@ -169,7 +169,7 @@ jobs:
         files : | 
           ./artifact/firmware/*
           ./artifact/buildinfo/*
-          ./OpenWrt_packages.tar.gz
+          ./openwrt-x86-64-packages.tar.gz
 
     - name: Delete old Workflow Runs
       uses: GitRML/delete-workflow-runs@main
