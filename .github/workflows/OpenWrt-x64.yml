@@ -51,12 +51,12 @@ jobs:
 #        ccache: true
 #        prefix: ${{ github.workspace }}/openwrt
 
-    - name: cache
-      uses: klever1988/cachewrtbuild@test
-      with:
-        ccache: true
-        mixkey: ${{matrix.target}}
-        prefix: ${{ github.workspace }}/openwrt
+#    - name: cache
+#      uses: klever1988/cachewrtbuild@test
+#      with:
+#        ccache: true
+#        mixkey: ${{matrix.target}}
+#        prefix: ${{ github.workspace }}/openwrt
 
 #    - name: Uncomment feeds source
 #      run: cd openwrt && sed -i '$a src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
@@ -93,7 +93,6 @@ jobs:
       id: package
       run: |
         cd openwrt
-        echo -e 'CONFIG_DEVEL=y\nCONFIG_CCACHE=y' >> .config;
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
