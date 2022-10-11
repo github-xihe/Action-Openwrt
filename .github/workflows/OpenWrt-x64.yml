@@ -164,7 +164,7 @@ jobs:
       env:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       with:
-        asset_name: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
+        tag: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
         files : | 
           ./artifact/firmware/*
           ./artifact/buildinfo/*
