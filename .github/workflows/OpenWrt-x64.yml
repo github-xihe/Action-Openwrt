@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2 
+      uses: actions/checkout@v3 
     
     - name: Initialization environment
       env:
@@ -165,7 +165,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
-        files : | 
+        file : | 
           ./artifact/firmware/*
           ./artifact/buildinfo/*
           ./openwrt-x86-64-packages.tar.gz
