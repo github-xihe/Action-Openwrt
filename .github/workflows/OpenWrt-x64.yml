@@ -159,13 +159,13 @@ jobs:
         path: ./artifact/firmware/
         
     - name: Upload artifact to release
-      uses: svenstaro/upload-release-action@2.3.0
+      uses: softprops/action-gh-release@v1
       if: steps.artifact.outputs.status == 'success' && !cancelled()
       env:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
-        file : | 
+        tag_name: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
+        files: | 
           ./artifact/firmware/*
           ./artifact/buildinfo/*
           ./openwrt-x86-64-packages.tar.gz
