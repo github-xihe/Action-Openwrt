@@ -142,7 +142,7 @@ jobs:
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/packages/
         tar -czvf ./openwrt-x86-64-packages.tar.gz ./artifact/packages/
-        echo "::set-output name=status::success"
+        echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload buildinfo
       uses: actions/upload-artifact@main
