@@ -5,4 +5,5 @@
 
 #添加一些软件包
 git clone https://github.com/fw876/helloworld.git                                    package/helloworld
-#git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git    package/luci-app-unblockneteasemusic
+git clone https://github.com/vernesong/OpenClash.git                                 package/luci-app-openclash
+#git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git   package/luci-app-unblockneteasemusic
