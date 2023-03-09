@@ -129,5 +129,5 @@ jobs:
       uses: GitRML/delete-workflow-runs@main
       if: steps.compile.outputs.status == 'success' && !cancelled()
       with:
-        retain_days: 8
-        keep_minimum_runs: 0
+        retain_days: 1
+        keep_minimum_runs: 1
