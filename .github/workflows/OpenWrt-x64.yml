@@ -178,7 +178,7 @@ jobs:
         keep_minimum_runs: 3
 
     - name: Delete Older Releases
-      uses: dev-drprasad/delete-older-releases@v0.2.0
+      uses: dev-drprasad/delete-older-releases@v0.2.1
       if: steps.artifact.outputs.status == 'success' && !cancelled()
       with:
         keep_latest: 1
