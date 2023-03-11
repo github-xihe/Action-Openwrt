@@ -158,31 +158,31 @@ jobs:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
         path: ./artifact/firmware/
         
-    - name: Upload artifact to release
-      uses: softprops/action-gh-release@v1
-      if: steps.artifact.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
-        files: | 
-          ./artifact/firmware/*
-          ./artifact/buildinfo/*
-          ./openwrt-x86-64-packages.tar.gz
+#    - name: Upload artifact to release
+#      uses: softprops/action-gh-release@v1
+#      if: steps.artifact.outputs.status == 'success' && !cancelled()
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      with:
+#        tag_name: OpenWrt_${{matrix.target}}_${{ env.FILE_DATE }}
+#        files: | 
+#          ./artifact/firmware/*
+#          ./artifact/buildinfo/*
+#          ./openwrt-x86-64-packages.tar.gz
 
     - name: Delete old Workflow Runs
       uses: Mattraks/delete-workflow-runs@v2
       if: steps.artifact.outputs.status == 'success' && !cancelled()
       with:
         retain_days: 3
-        keep_minimum_runs: 3
+        keep_minimum_runs: 1
 
-    - name: Delete Older Releases
-      uses: dev-drprasad/delete-older-releases@v0.2.1
-      if: steps.artifact.outputs.status == 'success' && !cancelled()
-      with:
-        keep_latest: 1
-        delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Delete Older Releases
+#      uses: dev-drprasad/delete-older-releases@v0.2.1
+#      if: steps.artifact.outputs.status == 'success' && !cancelled()
+#      with:
+#        keep_latest: 1
+#        delete_tags: true
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
